@@ -1,0 +1,124 @@
+{% extends 'adminBase.html' %} {% load static %} {% block article %}
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+.container {
+  border-radius: 10px;
+  background-color: pink;
+  padding: 15px;
+}
+
+ .heading{
+    border-radius: 10px;
+    background-color: purple;
+    padding: 10px;
+ }
+
+</style>
+<div class="container mt-5 w-50">
+
+        <div class="heading">
+        <center><h5 style="color:white"><u>Add Variety</u></h5></center>
+        </div>
+ </div>
+<div class="container mt-4 w-50  mx-auto  my-2 p-2">
+    <form
+      action="http://localhost:8000/groceryAdmin/addvariety/"
+      method="post"
+      enctype="multipart/form-data"
+      class="row g-3 needs-validation"
+      novalidate
+    >
+      {% csrf_token %}
+
+      <div class="mb-3 col-9 mx-auto my-2">
+          <label for="validationCustom04" class="form-label"><b>Catagory Name</b></label>
+        <select
+          class="form-select form-control"
+          name="catid"
+          id="catagory"
+          required
+        >
+          <option selected value="varietyId">Choose Catagory</option>
+          {% for cat in catagory %}
+          <option value="{{cat.0}}">{{cat.1}}</option>
+          {% endfor %}
+        </select>
+        <div class="invalid-feedback">Please select a valid catagory.</div>
+      </div>
+
+<!--      <div class="col-md-7 col-11 mx-auto my-3">-->
+      <div class="mb-3 col-9 mx-auto my-2">
+          <label for="validationCustom01" class="form-label"><b>Variety Name</b></label>
+        <input
+          type="text"
+          class="form-control"
+          id="variety"
+          placeholder="Write Variety Name..."
+          name="VarietyName"
+          required
+        />
+        <div class="invalid-feedback">Variety Name not looks good</div>
+      </div>
+<!--        <div class="mb-3 col-md-7 col-11 mx-auto my-3">-->
+        <div class="mb-3 col-9 mx-auto my-2">
+            <label for="validationCustom01" class="form-label"><b>Variety image</b></label>
+        <input
+          type="file"
+          class="form-control"
+          aria-label="file example"
+          name="varietyImage"
+          required
+        />
+        <div class="invalid-feedback">Variety Image not Found</div>
+      </div>
+
+<!--      <div class="mb-3 col-md-7 col-11 mx-auto my-3">-->
+      <div class="mb-3 col-9 mx-auto my-2">
+        <label for="validationTextarea" class="form-label"
+        ><b>Variety Description</b></label
+        >
+        <textarea
+          class="form-control"
+          id="validationTextarea"
+          placeholder="Write Variety Description"
+          name="VarietyDesc"
+          required
+        ></textarea>
+        <div class="invalid-feedback">Enter Valid Description</div>
+      </div>
+      <div class="col-12 text-center mx-auto my-2">
+        <button class="btn btn-success" type="submit">Add Variety</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+
+
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function () {
+    "use strict";
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll(".needs-validation");
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms).forEach(function (form) {
+      form.addEventListener(
+        "submit",
+        function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
+</script>
+{% endblock %}

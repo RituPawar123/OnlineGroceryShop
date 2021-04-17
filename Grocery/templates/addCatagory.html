@@ -1,0 +1,101 @@
+{% extends 'adminBase.html' %} 
+{% load static %} 
+{% block article %}
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+.container {
+  border-radius: 10px;
+  background-color: pink;
+  padding: 15px;
+}
+
+ .heading{
+    border-radius: 10px;
+    background-color: purple;
+    padding: 10px;
+ }
+
+</style>
+<div class="container mt-5 w-50">
+
+        <div class="heading">
+        <center><h5 style="color:white"><u>Add Catagory</u></h5></center>
+        </div>
+ </div>
+<div class="container mt-4 w-50  mx-auto  my-2 p-2">
+    <form action="http://localhost:8000/groceryAdmin/addcatagory/" enctype="multipart/form-data" method="post" class="row g-3 needs-validation" novalidate>
+    {% csrf_token %}
+      <div class="col-md-9 mx-auto my-3">
+          <label for="validationCustom01" class="form-label"><b>Catagory Name</b></label>
+        <input
+          type="text"
+          class="form-control"
+          id="validationCustom01"
+          placeholder="Write Catagory Name..."
+          name="catagoryName"        
+          required
+        />  
+        <div class="invalid-feedback">Catagory Name not looks good</div>
+      </div>
+      <div class="mb-3 col-9 mx-auto my-2">
+        <label for="validationCustom01" class="form-label"
+        ><b>Catagory image</b></label
+        >
+        <input
+          type="file"
+          class="form-control"
+          aria-label="file example"
+          name="catagoryImage"        
+          required
+
+        />
+        <div class="invalid-feedback">Catagory Image not Found</div>
+      </div>
+      <div class="mb-3 col-9 mx-auto my-2">
+          <label for="validationTextarea" class="form-label"><b>Catagory Description</b></label>
+        <textarea
+          class="form-control"
+          id="validationTextarea"
+          placeholder="Write Catagory Description..."
+          name="catagoryDesc"        
+          required
+        ></textarea>
+        <div class="invalid-feedback">
+        Enter Valid Description
+        </div>
+      </div>
+      <div class="col-12 text-center mx-auto my-2">
+        <button class="btn btn-success" type="submit">Add Catagory</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function () {
+    "use strict";
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll(".needs-validation");
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms).forEach(function (form) {
+      form.addEventListener(
+        "submit",
+        function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
+</script>
+{% endblock %}

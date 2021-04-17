@@ -1,0 +1,131 @@
+{% extends 'userBase.html' %} {% load static %} {% block article %}
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  * {
+    box-sizing: border-box;
+  }
+
+  .container {
+    border-radius: 10px;
+    background-color: pink;
+    padding: 20px;
+  }
+
+  .heading {
+    border-radius: 10px;
+    background-color: purple;
+    padding: 10px;
+    margin: 10;
+  }
+
+  .accordion {
+    background-color: pink;
+    border-radius:10px;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 17px;
+    transition: 0.4s;
+  }
+
+  .accordion:hover {
+    background-color: lightpink;
+  }
+
+  .temp:after {
+    content: "\25BC";
+    color: purple;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+  }
+
+  .temp:after {
+    content: "\25BC";
+  }
+
+.panel {
+  padding: 0 18px;
+  background-color: rgba(255, 255, 255, 0.8);
+  max-height: 0;
+  overflow: hidden;
+  border-radius:10px;
+  transition: max-height 0.2s ease-out;
+}
+
+ .card {
+     background-color: white;
+    border-radius:10px;
+}
+
+  .col-sm-1 img {
+    top: 10px;
+    width: 70%;
+    height: 100%;
+    bottom: 20px;
+  }
+  .col-sm-10 {
+  }
+
+  .embed-responsive .card-img-top {
+    object-fit: cover;
+  }
+</style>
+{% for catagory in catagories %}
+<div class="container mt-4">
+  <button class="accordion">
+    <div class="row">
+      <div class="col-4 col-md-2 img-fluid">
+        <img  style="max-height:100px" src="../media/{{catagory.0}}" />
+      </div>
+      <div class="col-8 col-md-10 temp">
+        <u
+          ><h5><b>{{catagory.1}}</b></h5></u>
+		<br />{{catagory.2}}
+      </div>
+    </div>
+  </button>
+  <div class="panel">
+    <div class="row mt-2">
+    {% for variety in catagory.4 %}
+      <div class="col-sm">
+        <div class="card text-center my-3 mx-0">
+          <div class="col-12">
+            <img style="max-height:70px" alt={{variety.0}} class="cimg" src="media/{{variety.1}}" />
+          </div>
+          <div class="card-block">
+            <h6 class="card-title"><b>{{variety.0}}</b></h6>
+            <a
+              href="http://localhost:8000/groceryUser/product?varietyId={{variety.2}}"
+              class="stretched-link"
+            ></a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+</div>
+{% endfor %}
+<script>
+  var acc = document.getElementsByClassName("accordion");
+  	var i;
+
+  	for (i = 0; i < acc.length; i++) {
+  	  acc[i].addEventListener("click", function() {
+  	    this.classList.toggle("active");
+  	    var panel = this.nextElementSibling;
+  	    if (panel.style.maxHeight) {
+  	      panel.style.maxHeight = null;
+  	    } else {
+  	      panel.style.maxHeight = panel.scrollHeight + "px";
+  	    }
+  	  });
+  	}
+</script>
+{% endblock %}
